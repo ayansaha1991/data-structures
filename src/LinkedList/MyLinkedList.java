@@ -22,7 +22,7 @@ public class MyLinkedList<E> {
 		MyNode<E> temp = head;
 		
 		int count = 1;
-		while(count < pos) {
+		while(count < pos-1) {
 			temp = temp.next;
 			System.out.println("Inside travarse : " + temp.data);
 			count++;
@@ -70,10 +70,13 @@ public class MyLinkedList<E> {
 		mylist.addFirst(13);
 		mylist.addFirst(14);
 		mylist.printList();
+		System.out.println();
 		
 		mylist.addAt(12, 2);
 		mylist.printList();
-		mylist.addAt(12, 2);
+		System.out.println();
+		
+		mylist.addAt(13, 2);
 		
 		mylist.printList();
 	}
