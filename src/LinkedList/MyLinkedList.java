@@ -6,6 +6,12 @@ public class MyLinkedList<E> {
 	
 	private int size = 0;
 	
+//	public boolean isEmpty() ;
+//	public void add(E data);
+//	public E remove();
+//	public E remove(int pos);
+	
+	
 	public void addFirst(E data) {
 
 		MyNode<E> temp = head;
@@ -14,8 +20,6 @@ public class MyLinkedList<E> {
 		newNode.next = head;
 		head = newNode;
 	}
-	
-//	public void add(E data);
 	
 	public void addAt(E data, int pos) {
 		
@@ -32,12 +36,6 @@ public class MyLinkedList<E> {
 		temp.next = newNode;
 		
 	}
-	
-	
-	
-//	public E remove();
-	
-//	public E remove(int pos);
 
 	public void printList() {
 		
