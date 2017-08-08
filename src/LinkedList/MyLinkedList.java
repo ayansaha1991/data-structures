@@ -2,31 +2,49 @@ package LinkedList;
 
 public class MyLinkedList<E> {
 	
-	private MyNode<E> head = null;
+	private MyNode<E> head ;
 	private int size = 0;
 	
-	private void travarse(MyNode<E> temp, int pos) {
+	
+	// public void revere();
+	
+	/**
+	 * @author Ayan Saha
+	 * <p>This utility method traverse the list to reach pos node of the list</p>
+	 * @return
+	 */
+	private MyNode<E> travarse(MyNode<E> temp, int pos) {
 			
 		int count = 1;
 		while(count < pos) {
 			temp = temp.next;
 			count++;
 		}
-		
+		return temp;
 	}
 	
 	public boolean isEmpty() {
 		return (head == null);
 	}
 	
+	public int size() {
+		return size;
+	}
+	
+	/**
+	 * @author Ayan Saha
+	 * <p>This method deletes the node from tail end
+	 * It uses traverse method reach the 2nd last element of the list. </p>
+	 * @return
+	 */	
 	public E remove() {
 		
 		if (isEmpty()) 
 			return null;
 		
 		MyNode<E> temp = head;
-		travarse(temp, size);
-		E removedData = temp.data;
+		temp = travarse(temp, size-1);
+		E removedData = temp.next.data;
 		temp.next = null;
 		size--;
 		return removedData;
@@ -34,9 +52,38 @@ public class MyLinkedList<E> {
 	
 	public E remove(int pos) {
 	
-		return null;
+		if (isEmpty() || (pos > size)) {
+			return null;
+		}
+
+		E removedData = null;
+		
+		if (pos == 1) {
+			removedData = removeFirst();
+		} else if (pos == size) {
+			removedData = remove();
+		} else {
+			MyNode<E> temp = head;
+			MyNode<E> temp1 ;
+			MyNode<E> temp2 ;
+			
+			temp1 = travarse(temp, pos-1);
+			temp2 = travarse(temp, pos);
+			removedData = temp2.data;
+			temp1.next = temp2.next;
+			size--;
+		}
+		
+		return removedData;
 	}
 	
+	public E removeFirst() {
+		E removedData = head.data;
+		head = head.next;
+		size--;
+		return removedData;
+	}
+
 	public void addFirst(E data) {
 
 		MyNode<E> temp = head;
@@ -59,33 +106,26 @@ public class MyLinkedList<E> {
 	public void addLast(E data) {
 
 		MyNode<E> temp = head;
-		int count = 1;
-		while(count < size) {
-			temp = temp.next;
-			System.out.println("Inside travarse : " + temp.data);
-			count++;
-		}
+		temp = travarse(temp, size);
 		
-		MyNode<E> newNode = new MyNode<>(data, temp.next);
-		newNode.next = null;
+		MyNode<E> newNode = new MyNode<>(data, null);
 		temp.next = newNode;
 		size++;
 	}
 
 	public void addAt(E data, int pos) {
 		
-		MyNode<E> temp = head;
-		int count = 1;
-		while(count < pos-1) {
-			temp = temp.next;
-			System.out.println("Inside travarse : " + temp.data);
-			count++;
+		if (pos == 1) {
+			addFirst(data);
+		} else if (pos == size) {
+			addLast(data);
+		} else {
+			MyNode<E> temp = head;
+			temp = travarse(temp, pos-1);
+			MyNode<E> newNode = new MyNode<E>(data, temp.next);
+			temp.next = newNode;
+			size++;
 		}
-		
-		MyNode<E> newNode = new MyNode<E>(data, temp.next);
-		temp.next = newNode;
-		size++;
-		
 	}
 
 	public void printList() {
@@ -113,33 +153,30 @@ public class MyLinkedList<E> {
 	
 	public static void main(String[] args) {
 		
-		System.out.println("This is compile time");
 		MyLinkedList<Integer> mylist = new MyLinkedList<>();
-		mylist.add(101);
-		mylist.addFirst(10);
-		mylist.add(102);
+		System.out.println("--------------Start Processing------------");
 		
-		/*mylist.addFirst(11);
-		mylist.addFirst(13);
-		mylist.addFirst(14);
+		mylist.add(10);
+		mylist.add(11);
 		mylist.printList();
-		System.out.println();
 		
-		mylist.addAt(12, 2);
+		System.out.println("------------Add First start-----------");
+		mylist.addFirst(9);
 		mylist.printList();
-		System.out.println();
 		
-		mylist.addAt(13, 2);
+		System.out.println("-----------Add at method start------------");
+		mylist.addAt(6, 1); 
+		mylist.addAt(7, 5); 
 		mylist.printList();
-		System.out.println("---------Add At-------------");
 		
-		mylist.add(100);
-		mylist.add(100);
+		System.out.println("-----------Removal Start------------------");
+		System.out.println("Removed last: " + mylist.remove());
 		mylist.printList();
-		System.out.println("---------remove-------------");*/
 		
+		System.out.println("-----------Remoce At start----------------");
+		System.out.println("Removed pos=1: " + mylist.remove(1));
 		mylist.printList();
-		System.out.println("Removed : " + mylist.remove());
+		System.out.println("Removed pos=1: " + mylist.remove(1));
 		mylist.printList();
 	}
 
