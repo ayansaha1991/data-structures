@@ -6,8 +6,6 @@ public class MyLinkedList<E> {
 	private int size = 0;
 	
 	
-	// public void revere();
-	
 	/**
 	 * @author Ayan Saha
 	 * <p>This utility method traverse the list to reach pos node of the list</p>
@@ -29,6 +27,21 @@ public class MyLinkedList<E> {
 	
 	public int size() {
 		return size;
+	}
+	
+	public void revere() {
+		
+		MyNode<E> current = head;
+		MyNode<E> prev = null;
+		MyNode<E> next;
+		
+		while(current != null) {
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+		}
+		head = prev;
 	}
 	
 	/**
@@ -169,7 +182,7 @@ public class MyLinkedList<E> {
 		mylist.addAt(7, 5); 
 		mylist.printList();
 		
-		System.out.println("-----------Removal Start------------------");
+		/*System.out.println("-----------Removal Start------------------");
 		System.out.println("Removed last: " + mylist.remove());
 		mylist.printList();
 		
@@ -177,6 +190,12 @@ public class MyLinkedList<E> {
 		System.out.println("Removed pos=1: " + mylist.remove(1));
 		mylist.printList();
 		System.out.println("Removed pos=1: " + mylist.remove(1));
+		mylist.printList();*/
+		
+		mylist.revere();
+		mylist.printList();
+		
+		mylist.remove();
 		mylist.printList();
 	}
 
