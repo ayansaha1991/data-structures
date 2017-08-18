@@ -44,7 +44,7 @@ public class BSTTree {
 		return newNode;
 	}
 	
-	public BSTNode insert(Integer data, BSTNode rootNode) {
+	public BSTNode insert(Integer data, BSTNode root) {
 		
 		if (root == null) {
 			root = createNode(data);
@@ -58,7 +58,7 @@ public class BSTTree {
 	}
 	
 	public void add(Integer data) {
-		insert(data, root);
+		root = insert(data, root);
 	}
 	
 	public static void main(String[] args) {
