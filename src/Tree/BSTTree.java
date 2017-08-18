@@ -21,15 +21,20 @@ public class BSTTree {
 		}
 	}
 	
-	public void printInOrder(BSTNode node) {
+	public void printInOrder() { 
+		inOrderRec(root);
+	}
 
+
+	private void inOrderRec(BSTNode node) {
+		
 		if(node == null) {
 			return;
 		}
 
-		printInOrder(node.left);
+		inOrderRec(node.left);
 		System.out.println(node.data + ", ");
-		printInOrder(node.right);
+		inOrderRec(node.right);
 	}
 
 	
@@ -39,25 +44,32 @@ public class BSTTree {
 		return newNode;
 	}
 	
-	public void insert(BSTNode current ,Integer data) {
-		
-		BSTNode newNode = createNode(data);
+	public BSTNode insert(Integer data, BSTNode rootNode) {
 		
 		if (root == null) {
-			root = newNode;
-		}
-		
-		if(newNode.data <= root.left.data) {
-			insert(current.left, data);
+			root = createNode(data);
+		}else if(data <= root.data) {
+			root.left = insert(data, root.left);
 		} else {
-			insert(current.right, data);
+			root.right = insert(data, root.right);
 		}
 		
+		return root;
+	}
+	
+	public void add(Integer data) {
+		insert(data, root);
 	}
 	
 	public static void main(String[] args) {
 		
 		BSTTree tree = new BSTTree();
+		tree.add(15);
+		tree.add(10);
+		tree.add(20);
+		tree.add(25);
+		
+		tree.printInOrder();
 	}
 
 }
