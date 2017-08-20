@@ -19,6 +19,12 @@ public class BSTTree {
 			this.left = null;
 			this.right = null;
 		}
+		
+		@Override
+		public String toString() {
+			String nodeStr = "Data : " + data + " Left Link : " + left ;
+			return nodeStr;
+		}
 	}
 	
 	public void printInOrder() { 
@@ -37,7 +43,25 @@ public class BSTTree {
 		inOrderRec(node.right);
 	}
 
+	private BSTNode searchRec(int data, BSTNode root) {
+
+		BSTNode dataFound = null;
+
+		if (root == null )
+			return null;
+
+		if (root.data == data) {
+			return root;
+		} else if (data <= root.data) {
+			dataFound = searchRec(data, root.left);
+		} else {
+			dataFound = searchRec(data, root.right);
+		}
+
+		return dataFound;
+	}
 	
+
 	private BSTNode createNode(Integer data) {
 		
 		BSTNode newNode = new BSTNode(data);
