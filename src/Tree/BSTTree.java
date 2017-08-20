@@ -1,5 +1,6 @@
 package Tree;
 
+
 public class BSTTree {
 	
 	private BSTNode root;
@@ -74,7 +75,7 @@ public class BSTTree {
 		int lHeight = heightRec(root.left);
 		int rHeight = heightRec(root.right);
 		
-		return max(lHeight, rHeight) + 1;
+		return Math.max(lHeight, rHeight) + 1;
 	}
 
 	public int findMax() {
