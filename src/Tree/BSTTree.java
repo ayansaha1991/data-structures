@@ -61,6 +61,39 @@ public class BSTTree {
 		return dataFound;
 	}
 	
+	public int height() {
+		return heightRec(root);
+	}
+	
+	private int heightRec(BSTNode root) {
+		
+		if(root == null) {
+			return -1;
+		}
+		
+		int lHeight = heightRec(root.left);
+		int rHeight = heightRec(root.right);
+		
+		return max(lHeight, rHeight) + 1;
+	}
+
+	public int findMax() {
+		
+		return findMaxRec(root);
+	}
+	
+	private int findMaxRec(BSTNode root) {
+		
+		if (root == null) {
+			return 0;
+		}
+		int max = root.data;
+		if (root.right != null && root.right.data > max) {
+			max = findMaxRec(root.right);
+		}
+		return max;
+	}
+	
 
 	private BSTNode createNode(Integer data) {
 		
