@@ -28,6 +28,8 @@ public class BSTTree {
 		}
 	}
 	
+	//public void delete();
+	
 	public void printInOrder() { 
 		inOrderRec(root);
 	}
@@ -111,7 +113,7 @@ public class BSTTree {
 		} else {
 			root.right = insert(data, root.right);
 		}
-		
+		  
 		return root;
 	}
 	
