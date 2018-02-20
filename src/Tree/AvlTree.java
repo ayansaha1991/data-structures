@@ -1,7 +1,5 @@
 package Tree;
 
-import Tree.BSTTree.BSTNode;
-
 /**
  * @author Ayan Saha
  * <p>This is a AVL Tree implementation.</p>
@@ -19,6 +17,10 @@ import Tree.BSTTree.BSTNode;
 public class AvlTree<T> {
 	
 	private AVLNode<T> root;
+
+	public AvlTree() {
+		root = null;
+	}
 	
 	private static class AVLNode<T> {
 		
@@ -55,8 +57,9 @@ public class AvlTree<T> {
 		AVLNode newnode = new AVLNode(data);
 		if (root == null) {
 			root = newnode;
+		} else {
+			addRec(root, newnode);
 		}
-		addRec(root, newnode);
 	}
 
 	private void addRec(AVLNode<T> rootNode, AVLNode<T> newnode) {
@@ -73,7 +76,7 @@ public class AvlTree<T> {
 				rootNode.right = newnode;
 				newnode.parent = rootNode;
 			} else {
-				addRec(rootNode, newnode);
+				addRec(rootNode.right, newnode);
 			}
 		}
 		
@@ -92,7 +95,7 @@ public class AvlTree<T> {
 			return;
 		}
 		
-		checkBalance(newNode);
+		checkBalance(newNode.parent);
 	}
 	
 	public void rebalance(AVLNode<T> newNode) {
@@ -101,20 +104,20 @@ public class AvlTree<T> {
 			//Left Heavy Tree.
 			if (height(newNode.left.left) - height(newNode.left.right) > 1) {
 				// Left child Left subtree situation. Rotate right
-				rightRotate();
+				rightRotate(newNode);
 			} else {
 				// Left Child Right subtree situation. Rotate Left-->Right--> Result
-				leftRightRotate();
+				leftRightRotate(newNode);
 			}
 			
 		} else if ((height(newNode.left)) - height(newNode.right) < -1) {
 			// Right Heavy Tree
 			if (height(newNode.right.left) - height(newNode.right.right) > 1) {
 				// Right child Left subtree situation. Rotate Right-->Left--> Result
-				rightLeftRotate();
+				rightLeftRotate(newNode);
 			} else {
 				// Right child Right Subtree situation. Rotate Left.
-				leftRightRotate();
+				leftRightRotate(newNode);
 			}
 		}
 		
@@ -127,12 +130,12 @@ public class AvlTree<T> {
 	
 	private int heightRec(AVLNode<T> node) {
 		
-		if(root == null) {
+		if(node == null) {
 			return -1;
 		}
 		
-		int lHeight = heightRec(root.left);
-		int rHeight = heightRec(root.right);
+		int lHeight = heightRec(node.left);
+		int rHeight = heightRec(node.right);
 		
 		return Math.max(lHeight, rHeight) + 1;
 	}
@@ -140,18 +143,29 @@ public class AvlTree<T> {
 	public void leftRotate() {
 
 	}
-	public void rightRotate() {
+	public void rightRotate(AVLNode newNode) {
+		
+		
 
 	}
-	public void leftRightRotate() {
+	public void leftRightRotate(AVLNode newNode) {
 
 	}
-	public void rightLeftRotate() {
+	public void rightLeftRotate(AVLNode newNode) {
 
 	}
 
 	//	public void delete();
+	
+	public static void main(String[] args) {
 		
+		AvlTree<Integer> avl = new AvlTree();
+		avl.insert(1);
+		avl.insert(2);
+		avl.insert(3);
+		avl.insert(4);
+		avl.insert(5);
+	}
 	
 	
 

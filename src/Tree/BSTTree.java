@@ -1,6 +1,11 @@
 package Tree;
 
-
+/**
+ * This is is BST implementation
+ * @author ayan
+ * It tries to achieve CRUD operations
+ *
+ */
 public class BSTTree {
 	
 	private BSTNode root;
@@ -9,6 +14,28 @@ public class BSTTree {
 		root = null;
 	}
 	
+	@Override
+	public boolean equals(Object tree) {
+		
+		if (this == tree) {
+			return true;
+		}
+		
+		if (this == null || tree == null) {
+			return false;
+		}
+		
+		if (getClass() != tree.getClass()) {
+			return false;
+		}
+		
+		BSTTree anotherTree = (BSTTree) tree;
+		
+		return true;
+	}
+
+
+
 	private static class BSTNode {
 		
 		Integer data;
@@ -121,6 +148,13 @@ public class BSTTree {
 		root = insert(data, root);
 	}
 	
+	/**
+	 * This method finds out the lowest common ancestor given a root
+	 */
+	public void lce(Integer node1, Integer node2 ) {
+		
+	}
+	
 	public static void main(String[] args) {
 		
 		BSTTree tree = new BSTTree();
@@ -128,6 +162,8 @@ public class BSTTree {
 		tree.add(10);
 		tree.add(20);
 		tree.add(25);
+		
+		tree.lce(10, 20);
 		
 		tree.printInOrder();
 	}
